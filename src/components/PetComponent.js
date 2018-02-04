@@ -25,17 +25,19 @@ class PetComponent extends React.Component {
     }
     
     handleLikeBtnClick= () => {
-        console.log(this.props.petName+ " component like button clicked")
-        this.setState({
-            likesCount: this.state.likesCount + 1
-        });
+       this.setState(function(prevState){
+           return{
+           likesCount: prevState.likesCount + 1
+       }
+       })
     }
 
     handleDislikeBtnClick= () => {
-        console.log(`${this.props.petName} component dislike button clicked`)
-        this.setState({
-            likesCount: this.state.likesCount - 1
-        })
+     this.setState(function(prevState){
+         return{
+         likesCount: prevState.likesCount - 1
+         }
+     })
     }
 
     render() {
