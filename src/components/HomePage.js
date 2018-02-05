@@ -20,19 +20,62 @@ var btnStyle = {
 class HomePage extends React.Component {
     constructor(props){
         super(props);
-        this.catCompInstRef = null;
-        this.dogCompInstRef = null;
+        this.state = {
+            catLikesCount: 0,
+            dogLikesCount: 0
+        }
         
     }
 
+    handleLikeBtnClick= (event) => {
+        var petname = event.target.value
+      if (petname === 'Cat'){
+          this.setState((prevState)=>{
+              return{
+                  catLikesCount: prevState.catLikesCount +1,
+                  dogLikesCount: prevState.dogLikesCount
+              }
+          })
+      }
+      else if (petname === 'Dog'){
+        this.setState((prevState)=>{
+            return{
+                catLikesCount: prevState.catLikesCount,
+                dogLikesCount: prevState.dogLikesCount +1
+            }
+        })
+    }
+    }
+
+    handleDislikeBtnClick= (event) => {
+        var petname = event.target.value
+        if (petname === 'Cat'){
+            this.setState((prevState)=>{
+                return{
+                    catLikesCount: prevState.catLikesCount -1,
+                    dogLikesCount: prevState.dogLikesCount
+                }
+            })
+        }
+        else if (petname === 'Dog'){
+          this.setState((prevState)=>{
+              return{
+                  catLikesCount: prevState.catLikesCount,
+                  dogLikesCount: prevState.dogLikesCount -1
+              }
+          })
+      }
+    }
+
     handleShowWinner = ()=>{
+
+        var catLikesCount = this.state.catLikesCount;
+        var dogLikesCount = this.state.dogLikesCount;
         
-        let catLikes = this.catCompInstRef.state.likesCount;
-        let dogLikes = this.dogCompInstRef.state.likesCount;
-        if(catLikes > dogLikes){
+        if(catLikesCount > dogLikesCount){
             console.log("Cat is the winner")
         }
-        else if(catLikes < dogLikes){
+        else if(catLikesCount < dogLikesCount){
             console.log("Dog is the winner")
         }else{
             console.log("It's a tie")
@@ -42,6 +85,7 @@ class HomePage extends React.Component {
     
     handleStartOver = ()=>{
         console.log("Start Over clicked")
+
     }
 
     render() {
@@ -53,13 +97,19 @@ class HomePage extends React.Component {
                 <div style={{ marginTop: 60, textAlign: "center" }}>
                     <PetComponent
                         petName="Cat"
+                        likesCount = {this.state.catLikesCount}
                         petImageUrl="https://i.ytimg.com/vi/W-PBFMECvTE/maxresdefault.jpg"
-                        ref = {(compInst)=>{this.catCompInstRef = compInst }}
+                        onLikeBtnClick = {this.handleLikeBtnClick}
+                        onDislikeBtnClick = {this.handleDislikeBtnClick}
+                      
                     />
                     <PetComponent
                         petName="Dog"
+                        likesCount = {this.state.dogLikesCount}                        
                         petImageUrl="http://www.petguide.com/wp-content/uploads/2013/05/cute-dog-names-12.jpg"
-                        ref = {(compInst)=>{this.dogCompInstRef = compInst}}
+                        onLikeBtnClick = {this.handleLikeBtnClick}
+                        onDislikeBtnClick = {this.handleDislikeBtnClick}
+                       
                     />
 
                 </div>

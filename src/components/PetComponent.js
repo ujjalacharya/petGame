@@ -19,35 +19,17 @@ class PetComponent extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            likesCount: 0
-        }
+        
     }
     
-    handleLikeBtnClick= () => {
-       this.setState(function(prevState){
-           return{
-           likesCount: prevState.likesCount + 1
-       }
-       })
-    }
-
-    handleDislikeBtnClick= () => {
-     this.setState(function(prevState){
-         return{
-         likesCount: prevState.likesCount - 1
-         }
-     })
-    }
-
     render() {
         return (
             <div style={compStyle}>
-                <h3>{this.props.petName} Like: {this.state.likesCount}</h3>
+                <h3>{this.props.petName} Like: {this.props.likesCount}</h3>
                 <img style={{ height: "400px", width: "400px" }}src={this.props.petImageUrl} alt={`${this.props.petName}`} />
                 <br />
-                <button style={btnStyle} onClick={this.handleLikeBtnClick}>Like</button>
-                <button style={btnStyle} onClick={this.handleDislikeBtnClick}>Dislike</button>
+                <button style={btnStyle} value={this.props.petName} onClick={this.props.onLikeBtnClick}>Like</button>
+                <button style={btnStyle} value={this.props.petName} onClick={this.props.onDislikeBtnClick}>Dislike</button>
             </div>
         )
     }
