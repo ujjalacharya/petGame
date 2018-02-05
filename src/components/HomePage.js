@@ -22,7 +22,9 @@ class HomePage extends React.Component {
         super(props);
         this.state = {
             catLikesCount: 0,
-            dogLikesCount: 0
+            dogLikesCount: 0,
+            catResult : '',
+            dogResult : ''
         }
         
     }
@@ -32,15 +34,13 @@ class HomePage extends React.Component {
       if (petname === 'Cat'){
           this.setState((prevState)=>{
               return{
-                  catLikesCount: prevState.catLikesCount +1,
-                  dogLikesCount: prevState.dogLikesCount
+                  catLikesCount: prevState.catLikesCount +1
               }
           })
       }
       else if (petname === 'Dog'){
         this.setState((prevState)=>{
             return{
-                catLikesCount: prevState.catLikesCount,
                 dogLikesCount: prevState.dogLikesCount +1
             }
         })
@@ -52,15 +52,13 @@ class HomePage extends React.Component {
         if (petname === 'Cat'){
             this.setState((prevState)=>{
                 return{
-                    catLikesCount: prevState.catLikesCount -1,
-                    dogLikesCount: prevState.dogLikesCount
+                    catLikesCount: prevState.catLikesCount -1
                 }
             })
         }
         else if (petname === 'Dog'){
           this.setState((prevState)=>{
               return{
-                  catLikesCount: prevState.catLikesCount,
                   dogLikesCount: prevState.dogLikesCount -1
               }
           })
@@ -71,15 +69,25 @@ class HomePage extends React.Component {
 
         var catLikesCount = this.state.catLikesCount;
         var dogLikesCount = this.state.dogLikesCount;
+        var catResult = "TIE";
+        var dogResult = "TIE";
+        
         
         if(catLikesCount > dogLikesCount){
             console.log("Cat is the winner")
+             catResult = 'WINNER'
+             dogResult = 'LOSER'
         }
         else if(catLikesCount < dogLikesCount){
             console.log("Dog is the winner")
-        }else{
-            console.log("It's a tie")
+             catResult = 'LOSER'
+             dogResult = 'WINNER'
         }
+
+        this.setState({
+            catResult: catResult,
+            dogResult: dogResult
+        })
     }
 
     
@@ -99,6 +107,7 @@ class HomePage extends React.Component {
                         petName="Cat"
                         likesCount = {this.state.catLikesCount}
                         petImageUrl="https://i.ytimg.com/vi/W-PBFMECvTE/maxresdefault.jpg"
+                        result = {this.state.catResult}
                         onLikeBtnClick = {this.handleLikeBtnClick}
                         onDislikeBtnClick = {this.handleDislikeBtnClick}
                       
@@ -107,6 +116,7 @@ class HomePage extends React.Component {
                         petName="Dog"
                         likesCount = {this.state.dogLikesCount}                        
                         petImageUrl="http://www.petguide.com/wp-content/uploads/2013/05/cute-dog-names-12.jpg"
+                        result = {this.state.dogResult}                        
                         onLikeBtnClick = {this.handleLikeBtnClick}
                         onDislikeBtnClick = {this.handleDislikeBtnClick}
                        
