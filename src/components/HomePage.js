@@ -87,12 +87,19 @@ class HomePage extends React.Component {
         this.setState({
             catResult: catResult,
             dogResult: dogResult
+            
         })
     }
 
     
     handleStartOver = ()=>{
-        console.log("Start Over clicked")
+        this.setState({
+            catResult: '',
+            dogResult: '',
+            catLikesCount: 0,
+            dogLikesCount: 0
+                     
+        })
 
     }
 

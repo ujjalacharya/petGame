@@ -18,6 +18,8 @@ var btnStyle = {
 var PetComponent = (props)=>{
 
     var result = null;
+    var disabled = false;
+
     if(props.result !== ''){
         var resultStyle = null;
         if(props.result === 'LOSER'){
@@ -26,6 +28,7 @@ var PetComponent = (props)=>{
             resultStyle = {color: 'green'};
         }
        result = <h2 style={resultStyle}>{props.result}</h2>
+       disabled = true;
     }
 
     return (
@@ -34,8 +37,8 @@ var PetComponent = (props)=>{
             <h3>{props.petName} Like: {props.likesCount}</h3>
             <img style={{ height: "400px", width: "400px" }}src={props.petImageUrl} alt={`${props.petName}`} />
             <br />
-            <button style={btnStyle} value={props.petName} onClick={props.onLikeBtnClick}>Like</button>
-            <button style={btnStyle} value={props.petName} onClick={props.onDislikeBtnClick}>Dislike</button>
+            <button style={btnStyle} value={props.petName} disabled={disabled} onClick={props.onLikeBtnClick}>Like</button>
+            <button style={btnStyle} value={props.petName} disabled={disabled} onClick={props.onDislikeBtnClick}>Dislike</button>
         </div>
     )
 }
