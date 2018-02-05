@@ -34,7 +34,11 @@ var PetComponent = (props)=>{
     return (
         <div style={compStyle}>
             {result}
-            <h3>{props.petName} Like: {props.likesCount}</h3>
+           {(props.result) ? (
+               <h3>{props.petName} Likes: {props.likesCount}</h3>
+           ) : (
+               <h3>{props.petName}</h3>
+           )}
             <img style={{ height: "400px", width: "400px" }}src={props.petImageUrl} alt={`${props.petName}`} />
             <br />
             <button style={btnStyle} value={props.petName} disabled={disabled} onClick={props.onLikeBtnClick}>Like</button>
